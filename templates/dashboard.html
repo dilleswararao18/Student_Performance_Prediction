@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h3 class="mb-4">Prediction Dashboard</h3>
+
+<div class="card shadow p-4 mb-4">
+
+    <h5>Prediction History</h5>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Hours</th>
+                    <th>Attendance</th>
+                    <th>Previous Score</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>
+                        {% if row[3] == "PASS" %}
+                            <span class="badge bg-success">PASS</span>
+                        {% else %}
+                            <span class="badge bg-danger">FAIL</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+<div class="card shadow p-4">
+
+    <h5>Model Accuracy Comparison</h5>
+    <img src="{{ url_for('static', filename='accuracy.png') }}" class="img-fluid">
+
+</div>
+
+{% endblock %}
